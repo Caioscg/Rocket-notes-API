@@ -13,7 +13,7 @@ class UsersControllers {
         const { name, email, password } = req.body
 
         if (!name) {
-            throw new AppError("Nome é obrigatório!")
+            throw new AppError("Nome é obrigatório!") 
         }
 
         res.status(201).json({ name, email, password })
