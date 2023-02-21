@@ -11,4 +11,4 @@ async function migrationRun() {
         .catch(error => console.error(error))
 }
 
-module.exports = migrationRun
+module.exports = migrationRun;
