@@ -6,6 +6,8 @@
  * delete - DELETE para remover um registro.
  */
 
+const { hash } = require("bcryptjs") // criptografia da senha
+
 const AppError = require("../utils/AppError")
 
 const sqliteConection = require("../database/sqlite")
@@ -21,7 +23,9 @@ class UsersControllers {
             throw new AppError("Este e-mail já está em uso!")
         }
 
-        await database.run("INSERT INTO users(name, email, password) VALUES (?, ?, ?)", [ name, email, password ])
+        const hashedPassword = await hash(password, 8) //! 8 é o valor de complexidade da criptografia
+
+        await database.run("INSERT INTO users(name, email, password) VALUES (?, ?, ?)", [ name, email, hashedPassword ])
 
         return res.status(201).json()
 
