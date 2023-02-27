@@ -6,7 +6,7 @@
  * delete - DELETE para remover um registro.
  */
 
-const { hash } = require("bcryptjs") // criptografia da senha
+const { hash } = require("bcryptjs") // criptografia da senha 
 
 const AppError = require("../utils/AppError")
 
