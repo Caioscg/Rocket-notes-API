@@ -8,5 +8,6 @@ const usersController = new UsersControllers()
 
 
 userRoutes.post("/", usersController.create)
+userRoutes.put("/:id", usersController.update)
 
 module.exports = userRoutes //* exportando para os outros arquivos
