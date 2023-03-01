@@ -6,7 +6,7 @@
  * delete - DELETE para remover um registro.
  */
 
-const { hash } = require("bcryptjs") // criptografia da senha
+const { hash, compare } = require("bcryptjs") // criptografia da senha
 
 const AppError = require("../utils/AppError")
 
@@ -38,8 +38,8 @@ class UsersControllers {
     }
 
     async update(req, res) {
-        const { name, email } = req.body
-        const { id } = req.params
+        const { name, email, password, old_password } = req.body
+        const { id } = req.params  //* id passado nno link
 
         const database = await sqliteConection()
         const user = await database.get("SELECT * FROM users WHERE id = (?)", [id])
@@ -54,16 +54,31 @@ class UsersControllers {
             throw new AppError("Este e-mail já está em uso!")
         }
 
-        user.name = name
-        user.email = email
+        user.name = name ?? user.name   //! se passar um nome muda o nome, senao fica com o antigo
+        user.email = email ?? user.email
+
+        if (password && !old_password) {
+            throw new AppError("Você precisa informar a senha antiga para definir a nova senha!")
+        }
+
+        if (password && old_password) {
+            const checkOldPassword = await compare(old_password, user.password)
+
+            if (!checkOldPassword) {
+                throw new AppError("A senha antiga não confere!")
+            }
+
+            user.password = await hash(password, 8)
+        }
 
         await database.run(`
             UPDATE users SET
             name = ?,
             email = ?,
-            updated_at = ?
+            password = ?,
+            updated_at = DATETIME('now')
             WHERE id = ?`,
-            [user.name, user.email, new Date(), id]
+            [user.name, user.email, user.password, id]
         )
 
         return res.status(200).json()
