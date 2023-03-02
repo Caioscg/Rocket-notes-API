@@ -39,7 +39,7 @@ class UsersControllers {
 
     async update(req, res) {
         const { name, email, password, old_password } = req.body
-        const { id } = req.params  //* id passado nno link
+        const { id } = req.params  //* id passado no link
 
         const database = await sqliteConection()
         const user = await database.get("SELECT * FROM users WHERE id = (?)", [id])
@@ -50,7 +50,7 @@ class UsersControllers {
     
         const userWithUpdatedEmail = await database.get("SELECT * FROM users WHERE email = (?)", [email])
 
-        if(userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id) {
+        if(userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id) {  // passou um email de outro id
             throw new AppError("Este e-mail já está em uso!")
         }
 

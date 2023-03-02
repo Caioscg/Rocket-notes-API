@@ -3,7 +3,7 @@ const createUsers = require('./CreateUsers')
 
 async function migrationRun() {
     const schemas = [
-        createUsers
+        createUsers      //* tabelas do banco de dados(só tem essa)
     ].join('')
 
     sqliteConection()
