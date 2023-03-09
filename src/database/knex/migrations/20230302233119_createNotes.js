@@ -1,4 +1,4 @@
-//TODO arq criado com 'npx knex migrate: make createNotes' (precisa do migrations criado corretamente no knexfile)
+//TODO arq criado com 'npx knex migrate:make createNotes' (precisa do migrations criado corretamente no knexfile)
 //! cria tabelas de forma automatizada
 exports.up = knex => knex.schema.createTable("notes", table => {
     table.increments("id")  // autoincrements
