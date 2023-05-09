@@ -13,5 +13,5 @@ exports.up = knex => knex.schema.createTable("notes", table => {
 exports.down = knex => knex.schema.dropTable("notes")
 
 
-//TODO 'npx knex migrrate:latest' para criar a table
+//TODO 'npx knex migrate:latest' para criar a table
 //TODO após criar o atalho no package.json é só rodar npm run migrate
