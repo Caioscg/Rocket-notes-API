@@ -39,7 +39,7 @@ class UsersControllers {
 
     async update(req, res) {
         const { name, email, password, old_password } = req.body
-        const { id } = req.params  //* id passado no link
+        const user_id = req.user.id
 
         const database = await sqliteConection()
         const user = await database.get("SELECT * FROM users WHERE id = (?)", [id])

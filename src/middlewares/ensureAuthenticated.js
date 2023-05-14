@@ -9,12 +9,12 @@ function ensureAuthenticated(req, res, next) {
         throw new AppError("JWT Token não informado", 401)
     }
 
-    const [, token] = authHeader.split(" ")  // token em no formato ' BARE xxxxxx ' -> estou esparando a string em um vetor no " ", e desconsiderando o BARE (n importa) 
+    const [, token] = authHeader.split(" ")  // token em no formato ' BARE xxxxxx ' -> estou separando a string em um vetor no " ", e desconsiderando o BARE (n importa) 
 
     try {
-        const { sub: user_id } = verify(token, AuthConfig.jwt.secret)
+        const { sub: user_id } = verify(token, AuthConfig.jwt.secret)  //* pega o id no token
 
-        req.user = {
+        req.user = {  //* insere o id dentro da req do user
             id: Number(user_id)
         }
 
