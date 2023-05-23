@@ -3,7 +3,7 @@ const multer = require("multer")  // npm install multer (p/ uploads)
 const crypto = require("crypto")
 
 const TMP_FOLDER = path.resolve(__dirname, "..", "..", "tmp")  // pasta temporaria
-const UPLOADS_FOLDER = path.resolve(__dirname, "uploads")     // pasta onde ficarao os uploads
+const UPLOADS_FOLDER = path.resolve(TMP_FOLDER, "uploads")     // pasta onde ficarao os uploads
 
 const MULTER = {
     storage: multer.diskStorage({
