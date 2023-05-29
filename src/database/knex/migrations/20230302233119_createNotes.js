@@ -15,3 +15,7 @@ exports.down = knex => knex.schema.dropTable("notes")
 
 //TODO 'npx knex migrate:latest' para criar a table
 //TODO após criar o atalho no package.json é só rodar npm run migrate
+
+
+//*? Atalho criado no package.json: sempre que excluir o banco de dados, 
+//*? rodar (npm run dev) para criar o banco e depois (npm run migrate) para inicializar as tabelas criada pelo knex novamente!!!
