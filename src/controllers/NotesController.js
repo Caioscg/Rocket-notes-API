@@ -78,6 +78,7 @@ class NotesController {
                 .whereLike("notes.title", `%${title}%`)             //*? e dentro desse id, busca a note com o titulo digitado
                 .whereIn("name", filterTags)                        //*? compara se o nome digitado pertence ao array
                 .innerJoin("notes", "notes.id", "tags.note_id")     //*? estou juntando a tags com a notes por meio do notes_id
+                .groupBy("notes.id") // nao repetir notas com msm tag
                 .orderBy("notes.title")
 
         } else {
