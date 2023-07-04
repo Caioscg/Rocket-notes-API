@@ -1,6 +1,6 @@
 module.exports = {
-    jwt: {
+    jwt: {       // npm install jsonwebtoken
         secret: "default",
-        expiresIn: "1d"
+        expiresIn: "7d"  // 7 dias até a expiração do token
     }
 }

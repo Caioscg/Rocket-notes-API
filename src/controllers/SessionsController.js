@@ -22,7 +22,7 @@ class SessionsController {
 
         const { secret, expiresIn } = authConfig.jwt
         const token = sign({}, secret, {  // objeto vazio são configurações adicionais
-            subject: String(user.id),
+            subject: String(user.id),   // id do usuário usado pra criar o token
             expiresIn
         })
 
