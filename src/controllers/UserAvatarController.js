@@ -2,12 +2,12 @@ const knex = require("../database/knex")
 const AppError = require("../utils/AppError")
 const DiskStorage = require("../providers/DiskStorage")
 
-class UserAvatarController {
+class UserAvatarController {  // usa as funções do DiskStorage para salvar a nova foto e deletar a antiga
     async update(req, res) {
         const user_id = req.user.id
         const avatarFilename = req.file.filename
         
-        const diskStorage = new DiskStorage
+        const diskStorage = new DiskStorage()
 
         const user = await knex("users").where({ id: user_id }).first()
 
