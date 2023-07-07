@@ -8,7 +8,7 @@ const UPLOADS_FOLDER = path.resolve(TMP_FOLDER, "uploads")     // pasta onde fic
 const MULTER = {
     storage: multer.diskStorage({
         destination: TMP_FOLDER,
-        filename(file, callback) {
+        filename(req, file, callback) {
             const fileHash = crypto.randomBytes(10).toString("hex")  // para garantir q nao vai te imgs duplicadas
             const fileName = `${fileHash}-${file.originalname}`
 
