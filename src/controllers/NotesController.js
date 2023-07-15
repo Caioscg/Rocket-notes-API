@@ -12,24 +12,28 @@ class NotesController {
             user_id
         })
 
-        const linksInsert = links.map(link => {   //**? Tabela link recebendo o note_id e o url = link
-            return {                              //**! created_at e id ele cria por contra própria
-                note_id,
-                url: link
-            }
-        })
+        if (links.length > 0) {
+            const linksInsert = links.map(link => {   //**? Tabela link recebendo o note_id e o url = link
+                return {                              //**! created_at e id ele cria por contra própria
+                    note_id,
+                    url: link
+                }
+            })
+    
+            await knex("links").insert(linksInsert)
+        }
 
-        await knex("links").insert(linksInsert)
-
-        const tagsInsert = tags.map(name => { //**? Tabela tags recebendo o note_id o name e user_id
-            return {                          //**! id ele cria por contra própria
-                note_id,
-                name,
-                user_id
-            }
-        })
-
-        await knex("tags").insert(tagsInsert)
+        if (tags.length > 0) {
+            const tagsInsert = tags.map(name => { //**? Tabela tags recebendo o note_id o name e user_id
+                return {                          //**! id ele cria por contra própria
+                    note_id,
+                    name,
+                    user_id
+                }
+            })
+    
+            await knex("tags").insert(tagsInsert)
+        }
 
         return res.json()
 
