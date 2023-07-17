@@ -1,3 +1,4 @@
+require("dotenv/config")  // npm install dotenv --save
 require("express-async-errors")
 
 const migrationsRun = require("./database/sqlite/migrations")
@@ -34,5 +35,5 @@ app.use((error, req, res, next) => {
     })
 })
 
-const PORT = 3333
+const PORT = process.env.PORT || 3333   // || para caso quem estiver testando a aplicação nao tiver setado as variaveis no .env
 app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`))
