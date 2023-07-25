@@ -6,7 +6,8 @@
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js --env production",
     "dev": "nodemon ./src/server.js",
-    "migrate": "knex migrate:latest"
+    "migrate": "knex migrate:latest",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Caio Gonzaga",
