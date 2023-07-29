@@ -11,22 +11,16 @@ const AppError = require("../utils/AppError")
 const sqliteConection = require("../database/sqlite")
 
 const UserRepository = require("../repositories/UserRepository")
+const UserCreateService = require("../services/UserCreateService")
 
 class UsersControllers {
     async create(req, res) {
         const { name, email, password } = req.body
 
         const userRepository = new UserRepository()
-        
-        const checkUserExists = await userRepository.findByEmail(email)
+        const userCreateService = new UserCreateService(userRepository)  // passa pro construtor
 
-        if (checkUserExists) {
-            throw new AppError("Este e-mail já está em uso!")
-        }
-
-        const hashedPassword = await hash(password, 8) //! 8 é o valor de complexidade da criptografia
-
-        await userRepository.create({ name, email, password: hashedPassword })
+        await userCreateService.execute({ name, email, password })
 
         return res.status(201).json()
     }
