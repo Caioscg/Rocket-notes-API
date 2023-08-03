@@ -2,7 +2,7 @@
 
 <p align="center">
 This is the back-end repository for Rocket Notes. <br>
-[Site Link](https://rocketn.netlify.app)
+Site Link: https://rocketn.netlify.app
 </p>
 
 <p align="center">
